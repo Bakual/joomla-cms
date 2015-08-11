@@ -44,7 +44,7 @@ class PlgSampledataDefault extends JPlugin
 		$data->title       = 'Default Sampledata';
 		$data->description = 'Default Sampledata.';
 		$data->icon        = 'book';
-		$data->steps       = 3;
+		$data->steps       = 1;
 
 		return $data;
 	}
@@ -64,34 +64,6 @@ class PlgSampledataDefault extends JPlugin
 		$response = new stdClass;
 		$response->success     = true;
 		$response->message     = JText::_('PLG_SAMPLEDATA_DEFAULT_STEP1');
-
-		return $response;
-	}
-
-	public function onAjaxSampledataApplyStep2()
-	{
-		if ($this->app->input->get('type') != $this->_name)
-		{
-			return;
-		};
-
-		$response = new stdClass;
-		$response->success     = true;
-		$response->message     = JText::_('PLG_SAMPLEDATA_DEFAULT_STEP2');
-
-		return $response;
-	}
-
-	public function onAjaxSampledataApplyStep3()
-	{
-		if ($this->app->input->get('type') != $this->_name)
-		{
-			return;
-		};
-
-		$response = new stdClass;
-		$response->success     = true;
-		$response->message     = JText::_('PLG_SAMPLEDATA_DEFAULT_STEP3');
 
 		return $response;
 	}
