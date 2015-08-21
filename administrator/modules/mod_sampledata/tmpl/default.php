@@ -14,6 +14,7 @@ JHtml::_('bootstrap.tooltip');
 JHtml::_('script', 'mod_sampledata/sampledata-process.js', false, true);
 
 JText::script('MOD_SAMPLEDATA_CONFIRM_START');
+JText::script('MOD_SAMPLEDATA_ITEM_ALREADY_PROCESSED');
 JText::script('MOD_SAMPLEDATA_INVALID_RESPONSE');
 
 JFactory::getDocument()->addScriptDeclaration('
@@ -40,8 +41,12 @@ JFactory::getDocument()->addScriptDeclaration('
 						</small>
 					</div>
 				</div>
+				<!-- Progress bar -->
 				<div class="row-fluid sampledata-progress-<?php echo $item->name; ?> hide">
 					<progress class="span12"></progress>
+				</div>
+				<!-- Progress messages -->
+				<div class="row-fluid sampledata-progress-<?php echo $item->name; ?> hide">
 					<ul class="unstyled"></ul>
 				</div>
 			<?php endforeach; ?>

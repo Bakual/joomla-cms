@@ -10,26 +10,28 @@
 
 	var sampledataAjax = function(type, steps, step) {
 		if (step > steps) {
+			$('.sampledata-' + type + ' .row-title').append('<span class="icon-publish"> </span>');
+			inProgress = false;
 			return;
 		}
 		var stepClass = 'sampledata-steps-' + type + '-' + step,
-			$stepLi = $('<li class="' + stepClass + '"><img src="' + window.modSampledataIconProgress + '" width="30" height="30" ></li>'),
+			$stepLi = $('<li class="' + stepClass + '"><p class="loader-image text-center"><img src="' + window.modSampledataIconProgress + '" width="30" height="30" ></p></li>'),
 			$progress = $(".sampledata-progress-" + type + " progress");
 
 		$("div.sampledata-progress-" + type + " ul").append($stepLi);
 
 		var request = $.ajax({
 			url: window.modSampledataUrl,
-    		type: 'POST',
-    		dataType: 'json',
-    		data: {
-    			type: type,
-    			plugin: 'SampledataApplyStep' + step,
-    			step: step
-    		}
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				type: type,
+				plugin: 'SampledataApplyStep' + step,
+				step: step
+			}
 		});
 		request.done(function(response){
-			$stepLi.children('img').remove();
+			$stepLi.children('.loader-image').remove();
 
 			if (response.success && response.data && response.data.length > 0) {
 				var success, value, resultClass, $msg;
@@ -54,23 +56,26 @@
 					sampledataAjax(type, steps, step);
 				}
 
-    		} else {
-    			$progress.hide();
-    			$stepLi.addClass('alert alert-error');
-    			$stepLi.html(Joomla.JText._('MOD_SAMPLEDATA_INVALID_RESPONSE'));
-    			inProgress = false;
-    		}
+			} else {
+				$stepLi.addClass('alert alert-error');
+				$stepLi.html(Joomla.JText._('MOD_SAMPLEDATA_INVALID_RESPONSE'));
+				inProgress = false;
+			}
 		});
-    	request.fail(function(jqXHR, textStatus){
-    		alert('Something went wrong! Please reboot the Windows and try again!');
-    	});
+		request.fail(function(jqXHR, textStatus){
+			alert('Something went wrong! Please reboot the Windows and try again!');
+		});
 	};
 
 	window.sampledataApply = function(el) {
 		var $el = $(el), type = $el.data('type'), steps = $el.data('steps');
 
 		// Check whether the work in progress or we alredy proccessed with current item
-		if (inProgress || $el.data('processed')) {
+		if (inProgress) {
+			return;
+		}
+		if ($el.data('processed')) {
+			alert(Joomla.JText._('MOD_SAMPLEDATA_ITEM_ALREADY_PROCESSED'));
 			return;
 		}
 
