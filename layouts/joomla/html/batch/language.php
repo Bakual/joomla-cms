@@ -19,6 +19,7 @@ JFactory::getDocument()->addScriptDeclaration(
 	'
 		jQuery(document).ready(function($){
 			if ($("#batch-category-id").length){var batchSelector = $("#batch-category-id");}
+			if ($("#batch-group-id").length){var batchSelector = $("#batch-group-id");}
 			if ($("#batch-menu-id").length){var batchSelector = $("#batch-menu-id");}
 			if ($("#batch-position-id").length){var batchSelector = $("#batch-position-id");}
 			if ($("#batch-copy-move").length) {
