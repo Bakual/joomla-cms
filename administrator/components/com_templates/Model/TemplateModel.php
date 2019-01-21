@@ -1069,16 +1069,17 @@ class TemplateModel extends FormModel
 				$result['modules'][] = $this->getOverridesFolder($module, $modulePath);
 			}
 
-			$layoutFolders = Folder::folders($layoutPath);
+			$layoutFolders = Folder::listFolderTree($layoutPath, '.');
 
 			foreach ($layoutFolders as $layoutFolder)
 			{
-				$layoutFolderPath = Path::clean($layoutPath . '/' . $layoutFolder . '/');
+				$layoutFolderPath = Path::clean($layoutFolder['fullname']);
+				$layoutFolderName = str_replace($layoutPath, '', $layoutFolderPath);
 				$layouts = Folder::folders($layoutFolderPath);
 
 				foreach ($layouts as $layout)
 				{
-					$result['layouts'][$layoutFolder][] = $this->getOverridesFolder($layout, $layoutFolderPath);
+					$result['layouts'][$layoutFolderName][] = $this->getOverridesFolder($layout, $layoutFolderPath);
 				}
 			}
 
@@ -1091,11 +1092,18 @@ class TemplateModel extends FormModel
 
 					if ($componentLayoutPath)
 					{
-						$layouts = Folder::folders($componentLayoutPath);
+						$layoutFolders = Folder::listFolderTree($componentLayoutPath, '.');
 
-						foreach ($layouts as $layout)
+						foreach ($layoutFolders as $layoutFolder)
 						{
-							$result['layouts'][$component][] = $this->getOverridesFolder($layout, $componentLayoutPath);
+							$layoutFolderPath = Path::clean($layoutFolder['fullname']);
+							$layoutFolderName = str_replace($componentLayoutPath, '', $layoutFolderPath);
+							$layouts = Folder::folders($layoutFolderPath);
+
+							foreach ($layouts as $layout)
+							{
+								$result['layouts'][$component . DIRECTORY_SEPARATOR . $layoutFolderName][] = $this->getOverridesFolder($layout, $layoutFolderPath);
+							}
 						}
 					}
 				}
