@@ -1016,6 +1016,8 @@ class TemplateModel extends FormModel
 	 */
 	public function getOverridesList()
 	{
+		$result = array();
+
 		if ($template = $this->getTemplate())
 		{
 			$client        = ApplicationHelper::getClientInfo($template->client_id);
@@ -1110,10 +1112,7 @@ class TemplateModel extends FormModel
 			}
 		}
 
-		if (!empty($result))
-		{
-			return $result;
-		}
+		return $result;
 	}
 
 	/**
