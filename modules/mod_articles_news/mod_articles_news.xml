@@ -2,8 +2,8 @@
 <extension type="module" version="3.1" client="site" method="upgrade">
 	<name>mod_articles_news</name>
 	<author>Joomla! Project</author>
-	<creationDate>July 2006</creationDate>
-	<copyright>Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.</copyright>
+	<creationDate>2006-07</creationDate>
+	<copyright>Copyright (C) 2005 - 2019 Open Source Matters. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
@@ -64,7 +64,7 @@
 					description="MOD_ARTICLES_NEWS_FIELD_IMAGES_ARTICLE_DESC"
 					default="none"
 					>
-					<option value="intro">MOD_ARTICLES_NEWS_OPTION_INTROIMAGE</option> 
+					<option value="intro">MOD_ARTICLES_NEWS_OPTION_INTROIMAGE</option>
 					<option value="full">MOD_ARTICLES_NEWS_OPTION_FULLIMAGE</option>
 					<option value="none">JNO</option>
 				</field>
@@ -192,7 +192,6 @@
 					label="MOD_ARTICLES_NEWS_FIELD_ORDERING_LABEL"
 					description="MOD_ARTICLES_NEWS_FIELD_ORDERING_DESC"
 					default="a.publish_up"
-					validate="options"
 					>
 					<option value="a.publish_up">MOD_ARTICLES_NEWS_FIELD_ORDERING_PUBLISHED_DATE</option>
 					<option value="a.created">MOD_ARTICLES_NEWS_FIELD_ORDERING_CREATED_DATE</option>
