@@ -15,7 +15,6 @@ use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Filesystem\Folder;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Log\Log;
-use Joomla\Component\Modules\Administrator\Model\ModuleModel;
 use Joomla\Database\ParameterType;
 
 /**
@@ -384,7 +383,7 @@ class InstallerScript
 	 */
 	public function addDashboardMenu(string $dashboard, string $preset)
 	{
-		$model  = new ModuleModel;
+		$model = Factory::getApplication()->bootComponent('com_modules')->getMVCFactory()->createModel('Module', 'Administrator', ['ignore_request' => true]);
 		$module = array(
 			'id'         => 0,
 			'asset_id'   => 0,
@@ -413,7 +412,8 @@ class InstallerScript
 
 		if (!$model->save($module))
 		{
-			Factory::getApplication()->enqueueMessage($model->getError());
+			Log::add(Text::sprintf('JLIB_INSTALLER_DASHBOARD_MENU_ADD', $model->getError()), Log::WARNING, 'jerror');
+			Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_INSTALLER_DASHBOARD_MENU_ADD', $model->getError()), 'error');
 		}
 	}
 }
