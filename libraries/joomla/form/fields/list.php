@@ -153,9 +153,12 @@ class JFormFieldList extends JFormField
 			$selected = (string) $option['selected'];
 			$selected = ($selected == 'true' || $selected == 'selected' || $selected == '1');
 
+			$translate = (string) $option['translate'];
+			$translate = !($translate === 'false' || $translate === 'off' || $translate === '0');
+
 			$tmp = array(
 					'value'    => $value,
-					'text'     => JText::alt($text, $fieldname),
+					'text'     => ($translate) ? JText::alt($text, $fieldname) : $text,
 					'disable'  => $disabled,
 					'class'    => (string) $option['class'],
 					'selected' => ($checked || $selected),
