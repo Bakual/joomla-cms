@@ -1020,10 +1020,10 @@
 				description="JFIELD_METADATA_ROBOTS_DESC"
 				>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="index, follow"></option>
-				<option value="noindex, follow"></option>
-				<option value="index, nofollow"></option>
-				<option value="noindex, nofollow"></option>
+				<option value="index, follow" translate="false"></option>
+				<option value="noindex, follow" translate="false"></option>
+				<option value="index, nofollow" translate="false"></option>
+				<option value="noindex, nofollow" translate="false"></option>
 			</field>
 
 			<field
