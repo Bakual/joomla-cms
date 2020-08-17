@@ -266,7 +266,7 @@ class PlgSystemActionLogs extends JPlugin
 		}
 		catch (Exception $exc)
 		{
-			// If we failed to execite
+			// If we failed to execute
 			$db->unlockTables();
 			$result = false;
 		}
@@ -481,7 +481,7 @@ class PlgSystemActionLogs extends JPlugin
 	 *
 	 * @return  string  The rendered value.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   3.9.16
 	 */
 	public static function renderActionlogsNotify($value)
 	{
@@ -495,7 +495,7 @@ class PlgSystemActionLogs extends JPlugin
 	 *
 	 * @return  string  The rendered value.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   3.9.16
 	 */
 	public static function renderActionlogsExtensions($extensions)
 	{
