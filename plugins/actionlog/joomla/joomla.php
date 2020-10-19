@@ -616,6 +616,13 @@ class PlgActionlogJoomla extends ActionLogPlugin
 				$messageLanguageKey = 'PLG_ACTIONLOG_JOOMLA_USER_RESET_COMPLETE';
 				$action             = 'resetcomplete';
 			}
+
+			// Registration Activation
+			if ($task === 'registration.activate')
+			{
+				$messageLanguageKey = 'PLG_ACTIONLOG_JOOMLA_USER_REGISTRATION_ACTIVATE';
+				$action             = 'activaterequest';
+			}
 		}
 		elseif ($isnew)
 		{
@@ -1049,16 +1056,24 @@ class PlgActionlogJoomla extends ActionLogPlugin
 	 *
 	 * Method is called after user update the CMS.
 	 *
+	 * @param   string  $oldVersion  The Joomla version before the update
+	 *
 	 * @return  void
 	 *
 	 * @since   3.9.21
 	 */
-	public function onJoomlaAfterUpdate()
+	public function onJoomlaAfterUpdate($oldVersion = null)
 	{
 		$context = $this->app->input->get('option');
 		$user    = JFactory::getUser();
+		
+		if (empty($oldVersion))
+		{			
+			$oldVersion = JText::_('JLIB_UNKNOWN');	
+		}
+
 		$message = array(
-			'action'      => 'cache',
+			'action'      => 'joomlaupdate',
 			'type'        => 'PLG_ACTIONLOG_JOOMLA_TYPE_USER',
 			'id'          => $user->id,
 			'title'       => $user->username,
@@ -1067,6 +1082,7 @@ class PlgActionlogJoomla extends ActionLogPlugin
 			'username'    => $user->username,
 			'accountlink' => 'index.php?option=com_users&task=user.edit&id=' . $user->id,
 			'version'     => JVERSION,
+			'oldversion'  => $oldVersion,
 		);
 		$this->addLog(array($message), 'PLG_ACTIONLOG_JOOMLA_USER_UPDATE', $context, $user->id);
 	}
